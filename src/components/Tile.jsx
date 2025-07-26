@@ -1,10 +1,12 @@
 import { useState, useCallback } from "react";
 
-const Tile = ({ image }) => {
-  const [show, toggleShow] = useState(false);
+const Tile = ({ tile }) => {
+  const { img, gotMatch } = tile;
+  const [show, toggleShow] = useState(true);
 
   const onClick = useCallback(() => {
-    toggleShow(!show);
+    if (gotMatch === true) toggleShow(true);
+    toggleShow(!show)
   }, [show]);
 
   return (
@@ -13,7 +15,7 @@ const Tile = ({ image }) => {
       onClick={onClick}
     >
       <img
-        src={image || "src/assets/butterscotch.png"}
+        src={img || "src/assets/butterscotch.png"}
         className={`h-full w-full object-cover absolute top-0 left-0 transition-opacity duration-300 ${
           show ? "opacity-100" : "opacity-0"
         }`}
@@ -23,10 +25,9 @@ const Tile = ({ image }) => {
         className={`w-full h-full bg-blue-400 absolute top-0 left-0 transition-opacity duration-300 flex items-center justify-center ${
           show ? "opacity-0" : "opacity-100"
         }`}
-      >
-      </div>
+      ></div>
     </div>
   );
 };
 
-export default Tile
+export default Tile;

@@ -3,8 +3,7 @@ import Tile from "./components/Tile";
 import "./App.css";
 
 function App() {
-  const level = Math.ceil(parseInt(localStorage.getItem("level")) || 18);
-
+  const level = 18;
   const icecreams = [
     "src/assets/butterscotch.png",
     "src/assets/icecream-with-cherry.png",
@@ -28,7 +27,8 @@ function App() {
     const pairs = [];
     while (pairs.length < level) {
       const img = icecreams[Math.floor(Math.random() * icecreams.length)];
-      pairs.push(img);
+      const gotMatch = false;
+      pairs.push({img, display, gotMatch});
     }
     return shuffle([...pairs, ...pairs]);
   }, [icecreams, level]);
@@ -47,7 +47,7 @@ function App() {
           }}
         >
           {tiles.map((tile, ind) => (
-            <Tile image={tile} key={ind} />
+            <Tile tile={tile} key={ind} />
           ))}
         </div>
       </div>
